@@ -9,9 +9,9 @@ resource "aws_security_group" "sg_all" {
   vpc_id      = "${var.vpc_id}"
 
   tags {
-    Name        = "${var.project}-${var.environment}-sg_all"
-    Environment = "${var.environment}"
-    Project     = "${var.project}"
+    Name        = "${var.environment}.${var.project}.sg_all"
+    environment = "${var.environment}"
+    stack     = "${var.project}"
   }
 }
 

@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = "${merge("${var.tags}",map("Name", "${var.project} ${var.environment} VPC", "Environment", "${var.environment}", "Project", "${var.project}"))}"
+  tags = "${merge("${var.tags}",map("Name", "${var.environment}.${var.project} VPC", "environment", "${var.environment}", "stack", "${var.project}"))}"
 }
 
 module "public_nat-bastion_subnets" {
@@ -90,5 +90,5 @@ module "private_management_subnets" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = "${aws_vpc.main.id}"
 
-  tags = "${merge("${var.tags}",map("Name", "${var.project} internet gateway", "Environment", "${var.environment}", "Project", "${var.project}"))}"
+  tags = "${merge("${var.tags}",map("Name", "${var.environment}.${var.project} internet gateway", "environment", "${var.environment}"))}"
 }
